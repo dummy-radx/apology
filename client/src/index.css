@@ -18,6 +18,11 @@ body {
   color: #4a4a4a;
   overflow-x: hidden;
   font-family: var(--font-sans);
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='24'>💖</text></svg>") 16 16, auto;
+}
+
+a, button, [role="button"], .cursor-pointer {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='24'>✨</text></svg>") 16 16, pointer !important;
 }
 
 /* Custom scrollbar for cuteness */
