@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const reasons = [
-  { id: 1, color: 'bg-blue-100', text: "Your smile lights up my entire world, even on the darkest days." },
-  { id: 2, color: 'bg-purple-100', text: "You always know exactly how to make me laugh when I'm stressed." },
-  { id: 3, color: 'bg-yellow-100', text: "Your kindness and the way you care for people is truly inspiring." },
-  { id: 4, color: 'bg-green-100', text: "Just hearing your voice makes everything feel okay." },
-  { id: 5, color: 'bg-pink-200', text: "You are my best friend, my soulmate, and my cutu pie." }
+  { id: 1, color: 'bg-blue-100', text: "Your smile lights up my entire world, even on the darkest days. ☀️" },
+  { id: 2, color: 'bg-purple-100', text: "You always know exactly how to make me laugh when I'm stressed. 😂" },
+  { id: 3, color: 'bg-yellow-100', text: "The cute little faces you make when you're concentrating. 🥺" },
+  { id: 4, color: 'bg-green-100', text: "Just hearing your voice makes everything feel okay. 🎶" },
+  { id: 5, color: 'bg-orange-100', text: "You're the only person I'd gladly share my last piece of Oreo Silk with. 🍫" },
+  { id: 6, color: 'bg-teal-100', text: "How your hugs instantly melt away all my worries. 🤗" },
+  { id: 7, color: 'bg-indigo-100', text: "The way your eyes sparkle when you talk about something you love. ✨" },
+  { id: 8, color: 'bg-rose-100', text: "Because simply existing in the same room as you feels like home. 🏡" },
+  { id: 9, color: 'bg-cyan-100', text: "You are my absolute favorite notification on my phone. 📱💖" },
+  { id: 10, color: 'bg-pink-200', text: "You are my best friend, my soulmate, and my precious cutu pie. 🥰" }
 ];
 
 const Reasons = () => {
