@@ -5,6 +5,9 @@ const memories = [
   { id: 1, image: '/memory_holding_hands.png', caption: 'Walking together ❤️', rotate: -6 },
   { id: 2, image: '/memory_coffee_date.png', caption: 'Best coffee dates', rotate: 4 },
   { id: 3, image: '/memory_sunset.png', caption: 'Sunsets with you', rotate: -3 },
+  { id: 4, image: '/memory_first_kiss.png', caption: 'Our first kiss 💋', rotate: 5 },
+  { id: 5, image: '/memory_first_vacation.png', caption: 'First vacation together 🏖️', rotate: -4 },
+  { id: 6, image: '/memory_first_anniversary.png', caption: 'First anniversary 🎂', rotate: 2 },
 ];
 
 const Memories = () => {

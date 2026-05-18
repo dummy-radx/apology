@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const reasons = [
@@ -35,35 +36,57 @@ const Reasons = () => {
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, type: "spring", bounce: 0.5 }}
-              whileHover={{ y: -10 }}
-              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", bounce: 0.5 }}
+              whileHover={{ y: -10, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+              whileTap={{ scale: 0.95, transition: { type: "spring", stiffness: 400, damping: 25 } }}
               onClick={() => setOpenEnvelope(openEnvelope === reason.id ? null : reason.id)}
               className={`absolute inset-0 rounded-lg shadow-md flex items-center justify-center border-2 border-white ${reason.color} z-20 overflow-hidden`}
+              style={{ willChange: "transform" }}
             >
               <div className="text-4xl relative z-10">💌</div>
               {/* Envelope styling via CSS borders */}
               <div className="absolute top-0 left-0 w-0 h-0 border-t-60 md:border-t-80 border-t-white/40 border-l-80 md:border-l-110 border-l-transparent border-r-80 md:border-r-110 border-r-transparent pointer-events-none"></div>
             </motion.div>
-
-            <AnimatePresence>
-              {openEnvelope === reason.id && (
-                <motion.div
-                  initial={{ opacity: 0, y: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, y: -120, scale: 1 }}
-                  exit={{ opacity: 0, y: 0, scale: 0.5 }}
-                  transition={{ type: "spring", bounce: 0.3 }}
-                  className="absolute -top-10 left-1/2 -translate-x-1/2 w-72 md:w-80 bg-white p-6 rounded-sm shadow-2xl z-30 pointer-events-none"
-                  style={{ backgroundImage: 'linear-gradient(transparent 95%, #fce4ec 5%)', backgroundSize: '100% 2.5rem' }}
-                >
-                  <p className="handwritten text-2xl md:text-3xl text-gray-800 text-center leading-10">{reason.text}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         ))}
       </div>
       <p className="mt-32 text-gray-500 text-sm italic">Tap the envelopes to open them!</p>
+
+      {/* Render modal in portal to avoid CSS containment issues */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {openEnvelope && (
+            <div className="fixed inset-0 z-100 flex items-center justify-center pointer-events-none">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/30 pointer-events-auto"
+                onClick={(e) => { e.stopPropagation(); setOpenEnvelope(null); }}
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: 20 }}
+                transition={{ type: "spring", bounce: 0.3 }}
+                className="relative w-[85vw] max-w-sm md:max-w-md bg-white p-6 md:p-8 rounded-sm shadow-2xl z-110 pointer-events-auto"
+                style={{ backgroundImage: 'linear-gradient(transparent 95%, #fce4ec 5%)', backgroundSize: '100% 2.5rem' }}
+              >
+                <button 
+                  onClick={(e) => { e.stopPropagation(); setOpenEnvelope(null); }}
+                  className="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-xl font-sans cursor-pointer"
+                >
+                  ✕
+                </button>
+                <p className="handwritten text-2xl md:text-3xl text-gray-800 text-center leading-10 pt-2">
+                  {reasons.find(r => r.id === openEnvelope)?.text}
+                </p>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 };
