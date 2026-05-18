@@ -9,15 +9,15 @@ const Hero = () => {
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4">
+    <section className="min-h-dvh flex flex-col items-center justify-center relative overflow-hidden px-6 pt-12 pb-24">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
         style={{ y: y1, opacity }}
-        className="text-center z-10"
+        className="text-center z-10 w-full max-w-[90vw]"
       >
-        <h1 className="text-6xl md:text-8xl handwritten text-pink-500 mb-4 drop-shadow-sm">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl handwritten text-pink-500 mb-4 drop-shadow-sm leading-tight">
           For Sreeparna
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 max-w-lg mx-auto font-medium">
