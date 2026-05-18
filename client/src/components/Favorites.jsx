@@ -52,41 +52,37 @@ const Favorites = () => {
             transition={{ delay: index * 0.2, duration: 0.5 }}
             className="flex flex-col items-center"
           >
-            <motion.div
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveItem(activeItem === item.id ? null : item.id)}
-              className={`w-40 h-40 md:w-56 md:h-56 rounded-full ${item.color} border-4 ${item.borderColor} shadow-lg flex items-center justify-center p-4 cursor-pointer relative z-20`}
+            <div className="relative flex flex-col items-center">
+              <motion.div
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setActiveItem(activeItem === item.id ? null : item.id)}
+                className={`w-40 h-40 md:w-56 md:h-56 rounded-full ${item.color} border-4 ${item.borderColor} shadow-lg flex items-center justify-center p-4 cursor-pointer relative z-20`}
+              >
+                <img src={item.image} alt={item.name} className="w-full h-full object-contain drop-shadow-md" />
+              </motion.div>
+              
+              <AnimatePresence>
+                {activeItem === item.id && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 0 }}
+                    animate={{ opacity: 1, scale: 1, y: 10 }}
+                    exit={{ opacity: 0, scale: 0.9, y: 0 }}
+                    className="absolute top-[90%] mt-2 bg-white p-4 rounded-xl shadow-xl border-2 border-pink-100 w-64 md:w-72 text-center z-50 origin-top pointer-events-none"
+                  >
+                    <h3 className="font-bold text-chocolate mb-1">{item.name}</h3>
+                    <p className="text-gray-600 handwritten text-2xl">{item.message}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
+            {/* Show simple text - kept in flow to prevent layout shift */}
+            <motion.p
+              animate={{ opacity: activeItem === item.id ? 0 : 1 }}
+              className="mt-4 text-chocolate font-medium handwritten text-3xl transition-opacity duration-300 pointer-events-none"
             >
-              <img src={item.image} alt={item.name} className="w-full h-full object-contain drop-shadow-md" />
-            </motion.div>
-            
-            <AnimatePresence>
-              {activeItem === item.id && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0, y: -20 }}
-                  animate={{ opacity: 1, height: 'auto', y: 10 }}
-                  exit={{ opacity: 0, height: 0, y: -20 }}
-                  className="mt-4 bg-white p-4 rounded-xl shadow-md border-2 border-pink-100 max-w-xs text-center relative z-10"
-                >
-                  <h3 className="font-bold text-chocolate mb-1">{item.name}</h3>
-                  <p className="text-gray-600 handwritten text-2xl">{item.message}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            
-            {/* Show simple text when not active */}
-            <AnimatePresence>
-              {activeItem !== item.id && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="mt-4 text-chocolate font-medium handwritten text-3xl"
-                >
-                  {item.name}
-                </motion.p>
-              )}
-            </AnimatePresence>
+              {item.name}
+            </motion.p>
           </motion.div>
         ))}
       </div>
