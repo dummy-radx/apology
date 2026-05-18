@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Quicksand", sans-serif;
+  --font-handwriting: "Caveat", cursive;
+  
+  --color-pastel-pink: #fff0f5;
+  --color-pastel-yellow: #fffde7;
+  --color-pastel-blue: #e3f2fd;
+  --color-pastel-purple: #f3e5f5;
+  --color-chocolate: #5d4037;
+  --color-light-chocolate: #8d6e63;
+  --color-sunflower: #ffd54f;
+}
+
+body {
+  background-color: var(--color-pastel-pink);
+  color: #4a4a4a;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+/* Custom scrollbar for cuteness */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-pastel-pink);
+}
+::-webkit-scrollbar-thumb {
+  background: #f8bbd0;
+  border-radius: 10px;
+  border: 3px solid var(--color-pastel-pink);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f48fb1;
+}
+
+.handwritten {
+  font-family: var(--font-handwriting);
+}

@@ -1,9 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Hero from './components/Hero';
+import Apology from './components/Apology';
+import Favorites from './components/Favorites';
+import Forgiveness from './components/Forgiveness';
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <main className="w-full">
+      <Hero />
+      <Apology />
+      <Favorites />
+      <Forgiveness />
+    </main>
+  );
+};
 
-export default App
+export default App;
